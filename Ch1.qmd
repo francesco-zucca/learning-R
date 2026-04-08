@@ -1,0 +1,57 @@
+---
+title: "ch2"
+author: "Francesco Zucca"
+format: html
+editor: visual
+---
+
+# 1 - DATA VISUALIZATION
+
+## 1.1 - Introduction
+
+This chapter covers the visualization of data using the library `ggplot2`\`, which is included in the `tidyverse`\` package. Hence, the first thing to do is to load the `tidyverse`\` package.
+
+```{r}
+# loading tidyverse
+library("tidyverse")
+```
+
+There are some conflicts but we can ignore them safely.
+
+## 1.1.1 - Loading a data frame
+
+To be able to generate any plot, we first need to load a dataset. The book uses the *penguins* dataset, but we will use the *iris* dataset.
+
+```{r}
+# loading a dataframe
+iris
+```
+
+#### The `?`\` operator
+
+The `?`\` operator or the `help()`\` function can be used to access documentation on anything loaded into the R session.
+
+```{r}
+?iris
+```
+
+We will focus on three main variables: *Sepal.Length*, *Petal.Length*, and *Species*.
+
+## 1.2 - Creating a plot with `ggplot2`\`
+
+With `ggplot2`\`, you begin a plot with the function `ggplot()`\`, which defines the plot object. Then, you apply layers to it. Hence:
+
+1.  `ggplot()`\`: plot function, with the following main agruments:
+    -   `data =`\`: argument that defines the dataset to use in the graph.
+
+    -   `mapping = aes()`\`: argument that defines how variables in your dataset are mapped to visual properties of your plot. The `x`\` and `y`\` arguments of the `aes`\` function specify which variables to map to the x and y axes.
+2.  `geom()`\`: function which defines the geometrical object that the plot uses to represent data (note that this is added with a `+`\` after the `ggplot()`\` function.
+
+```{r}
+# plotting mpg and hp
+ggplot(
+  data = iris,
+  mapping = aes(x = Sepal.Length, y = Petal.Length) 
+) +
+  geom_point()
+```
