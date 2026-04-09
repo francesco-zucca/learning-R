@@ -37,14 +37,14 @@ The `?`\` operator or the `help()`\` function can be used to access documentatio
 
 We will focus on three main variables: *Sepal.Length*, *Petal.Length*, and *Species*.
 
-## 1.2 - Creating a plot with `ggplot2`\`
+## 1.2 - Plotting with `ggplot2`\`
 
 With `ggplot2`\`, you begin a plot with the function `ggplot()`\`, which defines the plot object. Then, you apply layers to it. Hence:
 
-1.  `ggplot()`\`: plot function, with the following main agruments:
-    -   `data =`\`: argument that defines the dataset to use in the graph.
+1.  `ggplot()`\`: plot function, with the following main agruments: - `data =`\`: argument that defines the dataset to use in the graph.
 
     -   `mapping = aes()`\`: argument that defines how variables in your dataset are mapped to visual properties of your plot. The `x`\` and `y`\` arguments of the `aes`\` function specify which variables to map to the x and y axes.
+
 2.  `geom()`\`: function which defines the geometrical object that the plot uses to represent data (note that this is added with a `+`\` after the `ggplot()`\` function.
 
 ```{r}
@@ -54,4 +54,60 @@ ggplot(
   mapping = aes(x = Sepal.Length, y = Petal.Length) 
 ) +
   geom_point()
+```
+
+### 1.2.1 - Adding aesthetics and layers
+
+#### Adding aesthetics
+
+Different aesthetics can be added as an argument to the `aes`\` function. For example, you can add arguments to give different colors and shapes to different species.
+
+```{r}
+# adding color based on species
+ggplot(
+  data = iris,
+  mapping = aes(x = Sepal.Length, y = Petal.Length, 
+                color = Species, shape = Species) 
+) +
+  geom_point()
+```
+
+#### Adding layers
+
+More layers can also be added to the plot. For example, you can plot a smooth curve displaying the relationship between the variable on the y axis and the one on the x axis.
+
+```{r}
+# adding a smooth curve
+ggplot(
+  data = iris,
+  mapping = aes(x = Sepal.Length, y = Petal.Length, 
+                color = Species, shape = Species) 
+) +
+  geom_point() +
+  geom_smooth(method = "lm") # the method specifies the model
+```
+
+Notice that if you define aesthetic mappings directly into the `ggplot()`\` function, they get defined as the global level, hence why the `geom_smooth`\` layer is fitting a line for each one of the groups. This can be fixed by not defining the color entry at the global level, but rather in the `geom_point`\` layer (hence at the local level).
+
+```{r}
+# fitting only one line
+ggplot(
+  data = iris,
+  mapping = aes(x = Sepal.Length, y = Petal.Length) 
+) +
+  geom_point(mapping = aes(color = Species, shape = Species)) +
+  geom_smooth(method = "lm")
+```
+
+### 1.2.2 - ggplot2 calls
+
+When calling a function, argument names can be omitted, and R will automatically assign the values based on their order. For example, the first argument in the `ggplot()`\` function will always be the `data`\` argument.
+
+```{r}
+# rewriting the same function but omitting arguments
+ggplot(
+  iris, aes(Sepal.Length, Petal.Length)
+) +
+  geom_point(aes(color = Species, shape = Species)) +
+  geom_smooth(method = "lm")
 ```
