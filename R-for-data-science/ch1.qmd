@@ -18,7 +18,7 @@ library("tidyverse")
 
 There are some conflicts but we can ignore them safely.
 
-## 1.1.1 - Loading a data frame
+## 1.1.1 - Loading a dataframe
 
 To be able to generate any plot, we first need to load a dataset. The book uses the *penguins* dataset, but we will use the *iris* dataset.
 
@@ -99,6 +99,34 @@ ggplot(
   geom_smooth(method = "lm")
 ```
 
+#### Adding and improving labels
+
+Labels can be added and/or improved using the `labs()`\` function in a new layer. Following are some basic labels:
+
+-   `title`\` defines the label for the title.
+
+-   `subtitle`\` defines the label for the subtitle.
+
+-   `x`\` and `y`\` define the labels for the axis.
+
+-   `color`\` and `shape`\` define the labels for the legend.
+
+```{r}
+# adding labels
+ggplot(
+  data = iris,
+  mapping = aes(x = Sepal.Length, y = Petal.Length) 
+) +
+  geom_point(mapping = aes(color = Species, shape = Species)) +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Iris flowers petal length by septal length",
+    subtitle = "Grouped by species",
+    x = "Sepal length (cm)", y = "Petal length (cm)",
+    color = "Species", shape = "Species"
+  )
+```
+
 ### 1.2.2 - ggplot2 calls
 
 When calling a function, argument names can be omitted, and R will automatically assign the values based on their order. For example, the first argument in the `ggplot()`\` function will always be the `data`\` argument.
@@ -106,8 +134,81 @@ When calling a function, argument names can be omitted, and R will automatically
 ```{r}
 # rewriting the same function but omitting arguments
 ggplot(
-  iris, aes(Sepal.Length, Petal.Length)
+  iris, 
+  aes(Sepal.Length, Petal.Length)
 ) +
   geom_point(aes(color = Species, shape = Species)) +
   geom_smooth(method = "lm")
+```
+
+### 1.2.3 - Summary of the main ggplot2 plots
+
+With `ggplot2`\` it is possible to create a lot of different plots, both for categorical and numerical variables.
+
+#### Bar chart
+
+Bar charts (`geom_bar()`\`) are used the visualize the distribution of a categorical variable.
+
+```{r}
+# bar chart
+ggplot(
+  data = iris,
+  mapping = aes(x = Species, fill = Species)
+) +
+  geom_bar()
+```
+
+#### Histogram
+
+```{r}
+# histogram
+ggplot(
+  data = iris,
+  mapping = aes(x = Petal.Length)
+) +
+  geom_histogram(aes(fill = Species))
+```
+
+It is possible to set the number of bins with the `bins`\` argument.
+
+```{r}
+# histogram with specified number of bins
+ggplot(
+  data = iris,
+  mapping = aes(x = Petal.Length)
+) +
+  geom_histogram(bins = 15, aes(fill = Species))
+```
+
+#### Density
+
+```{r}
+# density plot
+ggplot(
+  data = iris,
+  mapping = aes(x = Petal.Length)
+) +
+  geom_density()
+```
+
+It is also possible to represent the density given a categorical variable (e.g. representing the density by iris species).
+
+```{r}
+# density by species
+ggplot(
+  data = iris,
+  mapping = aes(x = Petal.Length, color = Species, fill = Species)
+) +
+  geom_density(alpha = 0.5) # alpha is the transparency parameter
+```
+
+#### Boxplots
+
+```{r}
+# boxplot
+ggplot(
+  data = iris,
+  mapping = aes(x = Species, y = Petal.Length)
+) +
+  geom_boxplot()
 ```
