@@ -1,0 +1,83 @@
+---
+title: "Chapter 2"
+author: "Francesco Zucca"
+format: html
+editor: visual
+---
+
+# 2 - BASICS
+
+## 2.1 - Coding basics
+
+### 2.1.1 - Creating new objects
+
+You can create new objects using the assignment operator `<-`\`:
+
+```{r}
+# creating new objects
+x <- 2
+y <- 3
+a <- "first letter" # quotation marks for strings
+```
+
+Object names must start with a letter and can only contain letters, numbers, `-`\`, and `.`\`.
+
+### 2.1.2 - Using R as a calculator
+
+R can be used to do basic math calculations:
+
+-   `+`\` defines summation
+
+-   `-`\` define subtraction
+
+-   `*`\` defines multiplication
+
+-   `/`\` defines division
+
+-   `^`\` defines exponentiation
+
+```{r}
+# basic calculation
+z <- x * y
+z
+```
+
+### 2.1.3 - Creating a vector
+
+Multiple elements can be combined into a vector with `c()`\`:
+
+```{r}
+# vector example
+primes <- c(2, 3, 5, 7, 11, 13)
+```
+
+Arithmetic on vectors is applied element by element:
+
+```{r}
+# vector example
+primes^2
+```
+
+### 2.1.4 - Calling functions
+
+R functions are called like this in the following way:
+
+`function_name(argument1 = value1, argument2= value2, ...)`\`
+
+#### Generating a sequence
+
+For example, you can generate a sequence using the `seq()`\` function, which takes as first and second arguments `from`\` and `to`\`, respectively.
+
+```{r}
+# generating a sequence
+seq <- seq(from = 1, to = 10)
+seq
+```
+
+As always, it is possible to omit the names of the first several arguments if you provide them in the correct order. However, explicitly naming your arguments means you don't have to worry about their sequence.
+
+```{r}
+# inverting arguments
+seq <- seq(to = 10, from = 1)
+seq
+```

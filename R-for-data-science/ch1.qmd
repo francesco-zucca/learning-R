@@ -1,5 +1,5 @@
 ---
-title: "ch2"
+title: "Chapter 1"
 author: "Francesco Zucca"
 format: html
 editor: visual
