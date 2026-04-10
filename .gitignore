@@ -3,5 +3,8 @@
 .RData
 .Ruserdata
 
+# unwanted files
+*.png
+
 # mac files
 .DS_Store

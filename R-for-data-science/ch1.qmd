@@ -212,3 +212,24 @@ ggplot(
 ) +
   geom_boxplot()
 ```
+
+### 1.2.4 - Exporting plots
+
+With the `ggplot2`\` library plots can be saved with the `ggsave()`\` function, which will export the most recently created plot to your working directory.
+
+```{r}
+# rewriting the same function but omitting arguments
+ggplot(
+  data = iris,
+  mapping = aes(x = Sepal.Length, y = Petal.Length) 
+) +
+  geom_point(mapping = aes(color = Species, shape = Species)) +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Iris flowers petal length by septal length",
+    subtitle = "Grouped by species",
+    x = "Sepal length (cm)", y = "Petal length (cm)",
+    color = "Species", shape = "Species"
+  )
+ggsave(filename = "iris.png")
+```
