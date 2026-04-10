@@ -10,6 +10,7 @@ The core material in this repo will be based on the entirety of the book "R for 
 
 The project uses the following repository structure:
 
+```text
 ├── R-for-data-science/  # Notes and custom exercises for the "R for Data Science" book
 ├── renv/                # Project-specific R library environments
 ├── .Rprofile            # R startup script (used to activate the renv environment)
